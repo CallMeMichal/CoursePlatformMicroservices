@@ -1,0 +1,45 @@
+services:
+  # Infrastruktura
+  sqldb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Admin1234!
+    restart: always
+    ports:
+      - "1433:1433"
+  
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  
+  # Mikroserwisy
+  apigetaway:
+    image: ${DOCKER_REGISTRY-}apigetaway
+    build:
+      context: .
+      dockerfile: ApiGetaway/Dockerfile
+    environment:
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+    depends_on:
+      - rabbitmq
+  
+  loginregister.api:
+    image: ${DOCKER_REGISTRY-}loginregister.api
+    build:
+      context: .
+      dockerfile: LoginRegisterMicroservice/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=localhost,1433;Database=LoginRegisterDb;User Id=sa;Password=Admin1234!;TrustServerCertificate=True;"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+    depends_on:
+      - sqldb
+      - rabbitmq
+
+volumes:
+  sql_data:
