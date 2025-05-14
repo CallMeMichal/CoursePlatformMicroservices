@@ -40,6 +40,17 @@ services:
     depends_on:
       - sqldb
       - rabbitmq
-
+  course.api:
+    image: ${DOCKER_REGISTRY-}course.api
+    build:
+      context: .
+      dockerfile: CourseMicroservice/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=localhost,1433;Database=CourseDb;User Id=sa;Password=Admin1234!;TrustServerCertificate=True;"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+    depends_on:
+      - sqldb
+      - rabbitmq
 volumes:
   sql_data:

@@ -41,3 +41,14 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+  course.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8083
+      - "ConnectionStrings:DefaultConnection=Server=sqldb;Database=CourseDb;User Id=sa;Password=Admin1234!;TrustServerCertificate=True;"
+      #- "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+    ports:
+      - "8083:8083"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro

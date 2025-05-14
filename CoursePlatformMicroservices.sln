@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginRegisterMicroservice",
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CourseMicroservice", "CourseMicroservice", "{1567B7CA-32F3-4CA2-8BD3-EF6E339B4674}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseMicroservice", "CourseMicroservice\CourseMicroservice.csproj", "{BFC53848-4DA4-4647-B3F2-7F7A496C7771}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +47,10 @@ Global
 		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFC53848-4DA4-4647-B3F2-7F7A496C7771}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFC53848-4DA4-4647-B3F2-7F7A496C7771}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFC53848-4DA4-4647-B3F2-7F7A496C7771}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFC53848-4DA4-4647-B3F2-7F7A496C7771}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +63,8 @@ Global
 		{2A9CA88D-6BB8-458A-8A30-DEF6D0DB5185} = {75D3BF69-374A-4BE7-959E-BC9AB92F956D}
 		{A28506E1-2FBE-4574-BC66-AA757BA302DA} = {F428D810-DFB7-404F-8C7C-A930B18E626B}
 		{86881B9A-1DA4-4919-8394-635CD35012A9} = {2A9CA88D-6BB8-458A-8A30-DEF6D0DB5185}
+		{1567B7CA-32F3-4CA2-8BD3-EF6E339B4674} = {75D3BF69-374A-4BE7-959E-BC9AB92F956D}
+		{BFC53848-4DA4-4647-B3F2-7F7A496C7771} = {1567B7CA-32F3-4CA2-8BD3-EF6E339B4674}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BC076A16-D80B-4E59-9AFA-F69670087591}

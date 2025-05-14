@@ -1,4 +1,4 @@
-﻿namespace SharedModels.Models.LoginRegisterModels.Request
+﻿namespace SharedModels.Models.LoginRegisterModels.Request.LoginRegister
 {
     public class RegisterRequestModel
     {
@@ -6,5 +6,6 @@
         public string? LastName { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }
+        public DateTime? DateOfBirth { get; set; } // Dodanie daty urodzenia
     }
 }

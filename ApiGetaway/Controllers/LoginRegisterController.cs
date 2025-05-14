@@ -1,6 +1,6 @@
 ﻿using MassTransit;
 using Microsoft.AspNetCore.Mvc;
-using SharedModels.Models.LoginRegisterModels.Request;
+using SharedModels.Models.LoginRegisterModels.Request.LoginRegister;
 using SharedModels.Models.LoginRegisterModels.Response;
 
 namespace ApiGetaway.Controllers
@@ -18,7 +18,7 @@ namespace ApiGetaway.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> LoginUser([FromBody] LoginRequestModel request)
+        public async Task<ActionResult<ApiResponse>> LoginUser([FromBody] LoginRequestModel request)
         {
             var loginModel = new LoginRequestModel
             {
