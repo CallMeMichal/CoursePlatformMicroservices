@@ -1,4 +1,4 @@
-﻿namespace SharedModels.Models.LoginRegisterModels.Request.LoginRegister
+﻿namespace SharedModels.Models.LoginRegisterModels.Request
 {
     public class LoginRequestModel
     {

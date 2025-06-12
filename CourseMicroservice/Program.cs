@@ -1,10 +1,15 @@
 using CourseMicroservice.Events;
+using CourseMicroservice.Mapper;
 using CourseMicroservice.Repositories;
+using CourseMicroservice.Services;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<CourseService>();
+builder.Services.AddScoped<CourseRepository>();
 
 // Add services to the container.
 builder.Services.AddMassTransit(busConfigurator =>
@@ -16,12 +21,14 @@ builder.Services.AddMassTransit(busConfigurator =>
     busConfigurator.AddConsumer<CourseEvent>();
     busConfigurator.AddConsumer<CreateLessonEvent>();
     busConfigurator.AddConsumer<DeleteCourseEvent>();
+    busConfigurator.AddConsumer<DeleteLessonEvent>();
     busConfigurator.AddConsumer<GetAllCoursesEvent>();
     busConfigurator.AddConsumer<GetCourseEvent>();
     busConfigurator.AddConsumer<GetLessonEvent>();
     busConfigurator.AddConsumer<GetLessonsForCourseEvent>();
     busConfigurator.AddConsumer<UpdateCourseEvent>();
     busConfigurator.AddConsumer<UpdateLessonEvent>();
+    
 
     busConfigurator.UsingRabbitMq((context, configurator) =>
     {
@@ -40,7 +47,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 

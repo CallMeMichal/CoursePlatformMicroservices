@@ -1,14 +1,10 @@
-﻿using BCrypt.Net;
-using SharedModels.Models.Response;
+﻿using SharedModels.Models.Response;
 using System.Net;
 
-namespace LoginRegisterMicroservice.Services
+namespace CourseMicroservice.Helpers
 {
-    public static class Helpers
+    public static class ServiceResponseHelper
     {
-
-        private const int WorkFactor = 12;
-
         public static ApiResponse Success(string message)
         {
             return new ApiResponse
@@ -59,34 +55,5 @@ namespace LoginRegisterMicroservice.Services
                 Message = message,
             };
         }
-
-
-
-
-        
-        
-
-        /// <summary>
-        /// Haszuje hasło używając BCrypt
-        /// </summary>
-        /// <param name="password">Hasło w czystej postaci</param>
-        /// <returns>Bezpieczny hasz hasła</returns>
-        public static string HashPassword(string password)
-        {
-            return BCrypt.Net.BCrypt.HashPassword(password, WorkFactor);
-        }
-
-        /// <summary>
-        /// Weryfikuje hasło względem przechowywanego hasza
-        /// </summary>
-        /// <param name="password">Hasło w czystej postaci</param>
-        /// <param name="hashedPassword">Zahaszowane hasło z bazy danych</param>
-        /// <returns>True jeśli hasło jest poprawne, false w przeciwnym wypadku</returns>
-        public static bool VerifyPassword(string password, string hashedPassword)
-        {
-            return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
-        }
-
     }
 }
-

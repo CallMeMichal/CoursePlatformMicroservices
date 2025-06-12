@@ -17,6 +17,21 @@ namespace CourseMicroservice.Repositories
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Course>(entity =>
+            {
+                entity.HasKey(c => c.Id);
+                entity.Property(c => c.Id).ValueGeneratedOnAdd();
+                entity.Property(c => c.Name).HasMaxLength(200);
+                entity.Property(c => c.Description).HasMaxLength(1000);
+                entity.Property(c => c.Price).HasColumnType("decimal(18,2)");
+            });
+
+            modelBuilder.Entity<Lesson>()
+                .HasOne(l => l.Course)
+                .WithMany()
+                .HasForeignKey(l => l.CourseId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<UserProgress>()
                 .HasOne(up => up.Course)
                 .WithMany()
@@ -29,6 +44,7 @@ namespace CourseMicroservice.Repositories
                 .HasForeignKey(up => up.LessonId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // Indeks unikalny
             modelBuilder.Entity<UserProgress>()
                 .HasIndex(up => new { up.UserId, up.CourseId, up.LessonId })
                 .IsUnique();
@@ -39,11 +55,8 @@ namespace CourseMicroservice.Repositories
                     Id = 1,
                     Name = "Kurs C# dla początkujących",
                     Description = "Podstawy języka C# i programowania obiektowego",
-                    ImageUrl = "https://example.com/csharp.jpg",
-                    //Category = "Programowanie",
                     CreationDate = new DateTime(2024, 1, 1),
-                    Duration = 10.5,
-                    Price = 199.99,
+                    Price = 199.99m,
                     InstructorId = 1001
                 },
                 new Course
@@ -51,11 +64,9 @@ namespace CourseMicroservice.Repositories
                     Id = 2,
                     Name = "ASP.NET Core Web API",
                     Description = "Tworzenie API w technologii ASP.NET Core",
-                    ImageUrl = "https://example.com/aspnet.jpg",
-                    //Category = "Backend",
+
                     CreationDate = new DateTime(2024, 2, 1),
-                    Duration = 8,
-                    Price = 249.99,
+                    Price = 249.99m,
                     InstructorId = 1002
                 }
             );

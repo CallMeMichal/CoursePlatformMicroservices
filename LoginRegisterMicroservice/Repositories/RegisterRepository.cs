@@ -1,9 +1,4 @@
 ﻿using LoginRegisterMicroservice.Repositories.DatabaseModels;
-using LoginRegisterMicroservice.Services;
-using MassTransit.NewIdProviders;
-using Microsoft.EntityFrameworkCore;
-using SharedModels.Models.LoginRegisterModels.Request;
-using SharedModels.Models.LoginRegisterModels.Response;
 
 namespace LoginRegisterMicroservice.Repositories
 {

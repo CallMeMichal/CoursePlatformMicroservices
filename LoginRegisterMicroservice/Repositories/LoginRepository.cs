@@ -1,7 +1,5 @@
 ﻿using LoginRegisterMicroservice.Repositories.DatabaseModels;
 using Microsoft.EntityFrameworkCore;
-using SharedModels.Models.LoginRegisterModels.Request;
-using SharedModels.Models.LoginRegisterModels.Response;
 
 namespace LoginRegisterMicroservice.Repositories
 {

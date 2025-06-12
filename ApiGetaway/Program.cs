@@ -1,9 +1,11 @@
+using ApiGetaway.Services;
 using MassTransit;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<CourseServiceHelper>();
 
 //var rabbitMQConfig = builder.Configuration.GetSection("RabbitMQConfig").Get<RabbitMQConfig>();
 builder.Services.AddMassTransit(busConfigurator =>

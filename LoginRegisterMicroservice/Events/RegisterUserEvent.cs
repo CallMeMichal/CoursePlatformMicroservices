@@ -1,6 +1,6 @@
 ﻿using LoginRegisterMicroservice.Services;
 using MassTransit;
-using SharedModels.Models.LoginRegisterModels.Request.LoginRegister;
+using SharedModels.Models.LoginRegisterModels.Request;
 
 namespace LoginRegisterMicroservice.Events
 {

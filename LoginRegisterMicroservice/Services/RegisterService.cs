@@ -1,7 +1,7 @@
 ﻿using LoginRegisterMicroservice.Repositories;
 using LoginRegisterMicroservice.Repositories.DatabaseModels;
-using SharedModels.Models.LoginRegisterModels.Request.LoginRegister;
-using SharedModels.Models.LoginRegisterModels.Response;
+using SharedModels.Models.LoginRegisterModels.Request;
+using SharedModels.Models.Response;
 
 namespace LoginRegisterMicroservice.Services
 {
