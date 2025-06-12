@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using Microsoft.AspNetCore.Mvc;
-using SharedModels.Models.LoginRegisterModels.Request.LoginRegister;
-using SharedModels.Models.LoginRegisterModels.Response;
+using SharedModels.Models.LoginRegisterModels.Request;
+using SharedModels.Models.Response;
 
 namespace ApiGetaway.Controllers
 {

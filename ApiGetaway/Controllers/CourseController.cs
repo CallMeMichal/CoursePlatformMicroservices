@@ -1,114 +1,100 @@
-﻿using MassTransit;
+﻿using ApiGetaway.Services;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
-using SharedModels.Models.LoginRegisterModels.Request.Course;
-using SharedModels.Models.LoginRegisterModels.Response;
+using SharedModels.Models.CourseModels.Request;
+using SharedModels.Models.CourseModels.Response;
+using SharedModels.Models.Response;
 
 namespace ApiGetaway.Controllers
 {
     [Route("api/v1/")]
     public class CourseController : Controller
     {
-        private readonly IRequestClient<CreateCourseRequestModel> _createCourseClient;
+        private readonly CourseServiceHelper _courseService;
 
-        public CourseController(IRequestClient<CreateCourseRequestModel> createCourseClient)
+        public CourseController(CourseServiceHelper courseService)
         {
-            _createCourseClient = createCourseClient;
+            _courseService = courseService;
         }
-
+        //
         [HttpPost]
         [Route("course")]
-        public async Task<IActionResult> CreateCourse([FromBody] CreateCourseRequestModel request)
+        public async Task<IActionResult> CreateCourse(CreateCourseRequestModel request)
         {
-            int instructorId = 1;
-
-            CreateCourseRequestModel courseModel = new CreateCourseRequestModel()
-            {
-                CreationDate = DateTime.Now,
-                Description = request.Description,
-                Duration = 200,
-                ImageUrl = null,
-                InstructorId = instructorId,
-                Name = "Kurs Pływania",
-                Price = 200
-            };
-
-            var response = await _createCourseClient.GetResponse<ApiResponse>(courseModel);
-
+            var response = await _courseService.CreateCourseAsync(request);
             return Ok(response);
         }
-
+        //
         [HttpGet]
         [Route("course/{id}")]
         public async Task<IActionResult> GetCourse(int id)
         {
-            // Simulate some processing
-            await Task.Delay(1000);
-            // Return a success response
-            return Ok(new { message = "Course retrieved successfully", courseId = id });
+            var response = await _courseService.GetCourseAsync(id);
+            return Ok(response);
         }
 
         [HttpPut]
         [Route("course/{id}")]
-        public async Task<IActionResult> UpdateCourse(int id, [FromBody] object course)
+        public async Task<IActionResult> UpdateCourse([FromRoute] int id, UpdateCourseModel request)
         {
-            // Simulate some processing
-            await Task.Delay(1000);
-            // Return a success response
-            return Ok(new { message = "Course updated successfully", courseId = id, course });
+            var response = await _courseService.UpdateCourseAsync(id, request);
+            return Ok(response);
         }
-
+        //
         [HttpDelete]
         [Route("course/{id}")]
         public async Task<IActionResult> DeleteCourse(int id)
         {
-            // Simulate some processing
-            await Task.Delay(1000);
-            // Return a success response
-            return Ok(new { message = "Course deleted successfully", courseId = id });
+            var response = await _courseService.DeleteCourseAsync(id);
+            return Ok(response);
         }
-
+        //
         [HttpGet]
         [Route("courses")]
         public async Task<IActionResult> GetAllCourses()
         {
-            // Simulate some processing
-            await Task.Delay(1000);
-            // Return a success response
-            return Ok(new { message = "All courses retrieved successfully" });
+            var response = await _courseService.GetAllCoursesAsync();
+            return Ok(response);
         }
 
-        // GET: api/v1/course/{courseId}/lessons
+        //
         [HttpGet("course/{courseId}/lessons")]
         public async Task<IActionResult> GetLessonsForCourse(int courseId)
         {
-            throw new NotImplementedException();
+            var response = await _courseService.GetLessonsForCourseAsync(courseId);
+            return Ok(response);
         }
 
-        // GET: api/v1/course/{courseId}/lesson/{lessonId}
+        //
         [HttpGet("course/{courseId}/lesson/{lessonId}")]
         public async Task<IActionResult> GetLesson(int courseId, int lessonId)
         {
-            throw new NotImplementedException();
+            var response = await _courseService.GetLessonAsync(courseId,lessonId);
+            return Ok(response);
         }
 
-        // POST: api/v1/course/{courseId}/lesson
+        //
         [HttpPost("course/{courseId}/lesson")]
-        public async Task<IActionResult> CreateLesson(int courseId, [FromBody] object lesson)
+        public async Task<IActionResult> CreateLesson([FromRoute] int courseId, CreateLessonModel request)
         {
-            throw new NotImplementedException();
+
+            var response = await _courseService.CreateLessonAsync(request, courseId);
+            return Ok(response);
         }
-        // PUT: api/v1/course/{courseId}/lesson/{lessonId}
+       
         [HttpPut("course/{courseId}/lesson/{lessonId}")]
-        public async Task<IActionResult> UpdateLesson(int courseId, int lessonId, [FromBody] object lesson)
+        public async Task<IActionResult> UpdateLesson([FromRoute]  int courseId, [FromRoute] int lessonId, UpdateLessonModel request)
         {
-            throw new NotImplementedException();
+            var response = await _courseService.UpdateLessonAsync(courseId,lessonId,request);
+            return Ok(response);
         }
 
-        // DELETE: api/v1/course/{courseId}/lesson/{lessonId}
+        //
         [HttpDelete("course/{courseId}/lesson/{lessonId}")]
         public async Task<IActionResult> DeleteLesson(int courseId, int lessonId)
         {
-            throw new NotImplementedException();
+            var response = await _courseService.DeleteLessonAsync(courseId, lessonId);
+            return Ok(response);
         }
     }
 }
